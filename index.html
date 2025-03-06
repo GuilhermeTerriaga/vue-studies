@@ -7,6 +7,17 @@
     <title>Project One</title>
 </head>
 <body>
-    
+    <div id="app">
+    <p>{{greetings}}</p>
+
+    </div>
 </body>
+<script>
+    const {createApp} = Vue;
+    createApp({setup(){
+        const greetings = 'Hello world!'
+        return {greetings}
+        }
+    }).mount('#app');
+</script>
 </html>
