@@ -1,23 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <title>Project One</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="app">
-    <p>{{greetings}}</p>
-
+      <p>{{greetings}}</p>
+      <p>Is it True? {{isTrue? 'Yes':'No'}}</p>
+      <p>{{array[random]}}</p>
+      <p>{{obj.car}}</p>
+      <p>{{greet2}}</p>
     </div>
-</body>
-<script>
-    const {createApp} = Vue;
-    createApp({setup(){
-        const greetings = 'Hello world!'
-        return {greetings}
-        }
-    }).mount('#app');
-</script>
+  </body>
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      setup() {
+        const greetings = "Hello world!";
+        const greet2 = "Hello guys! Today is " + new Date().toLocaleString();
+        const isTrue = false;
+        const array = ["Teste", "Magneto", "Batata", "Abobra"];
+        const obj = { car: "Ferrari" };
+        const random = Math.floor(Math.random() * array.length);
+        return { greetings, isTrue, array, random, obj, greet2 };
+      },
+    }).mount("#app");
+  </script>
 </html>
