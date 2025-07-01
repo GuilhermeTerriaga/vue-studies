@@ -8,24 +8,100 @@
   </head>
   <body>
     <div id="app">
-      <p>{{greetings}}</p>
+      <!-- <p>{{greetings}}</p> -->
       <p>Is it True? {{isTrue? 'Yes':'No'}}</p>
       <p>{{array[random]}}</p>
-      <p>{{obj.car}}</p>
-      <p>{{greet2}}</p>
+      <!-- <p>{{obj.car}}</p> -->
+      <!-- <p>{{greet2}}</p> -->
+      <!-- <p>{{message()}}</p>
+      <p>{{message2()}}</p>  -->
+      <p>Value: {{count}}</p>
+      {{changeValue()}}
+      <p>user name {{user.name}}</p>
+      <p>user occupation {{user.occupation}}</p>
+      <p>user age {{user.age}}</p>
+      <img v-bind:src="image.src" v-bind:alt="image.alt" />
+      <hr />
+      <a v-bind:href="link">go!</a>
+      <br />
+      <p v-text="greetings"></p>
+      <p v-html="myHtml"></p>
+      <p v-if="user2.age < user2.allowed">You are not old enough</p>
+      <p v-else-if="checkUser">welcome back {{user2.name}}</p>
+      <p v-else>You are not allowed</p>
+      {{update()}}
+      <p v-show="true">show it</p>
+      <p v-show="false">don't show it</p>
+      <hr />
     </div>
   </body>
   <script>
-    const { createApp } = Vue;
+    const { createApp, ref, reactive } = Vue;
     createApp({
       setup() {
+        let count = ref(0);
+        function changeValue() {
+          setTimeout(() => {
+            count.value = 1;
+          }, 3000);
+        }
+        function update() {
+          setTimeout(() => {
+            user.age = 42;
+            user2.age = 42;
+          }, 3000);
+        }
+        function checkUser() {
+          return user.name == "Catbug" ? true : false;
+        }
+
+        let user2 = reactive({
+          name: "Catbug",
+          allowed: 18,
+          age: 15,
+        });
+
+        let user = reactive({
+          name: "Magneto",
+          occupation: "DEV",
+          age: 25,
+        });
+        const image = ref({
+          src: "https://picsum.photos/200/300",
+          alt: "An image",
+        });
+        const link = "https://google.com";
         const greetings = "Hello world!";
-        const greet2 = "Hello guys! Today is " + new Date().toLocaleString();
+        const myHtml = "<strong>alakazam!</strong>";
+        // const greet2 = "Hello guys! Today is " + new Date().toLocaleString();
+        // const obj = { car: "Ferrari" };
+        // const message = () => "Message from fn";
+        // function message2() {
+        //   return "Message2 from function";
+        // }
         const isTrue = false;
         const array = ["Teste", "Magneto", "Batata", "Abobra"];
-        const obj = { car: "Ferrari" };
         const random = Math.floor(Math.random() * array.length);
-        return { greetings, isTrue, array, random, obj, greet2 };
+        // methods:{
+        //     welcome(){
+        //       return 'Hello from welcome!'
+        //     }
+        //   }
+        return {
+          isTrue,
+          array,
+          random,
+          changeValue,
+          count,
+          user,
+          update,
+          image,
+          link,
+          greetings,
+          myHtml,
+          user2,
+          checkUser,
+        };
       },
     }).mount("#app");
   </script>
